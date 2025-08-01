@@ -9,7 +9,7 @@ import { Upgrades } from "./pages/upgrades";
 
 export const routes = createBrowserRouter([
     {
-        path: "/",
+        path: "/Farmle/",
         Component: Root,
         errorElement: <NotFound />,
         children: [
