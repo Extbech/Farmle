@@ -5,35 +5,31 @@ import type { RootState } from "../../store/store";
 import { upgradeWhickens } from "../../store/farmSlice";
 import { getTotalCost } from "../../logic/farmCostLogic";
 import { WhickenCostMultiplier } from "../../configuration/gameConstants";
+import { getTotalWPS, getWhickenWPS } from "../../logic/gameLogic";
 
 export const Whickens = () => {
     const dispatch = useDispatch();
-
-    const { whickens, cost, amount, description, wheat } = useSelector((state: RootState) => ({
-        whickens: state.farm.whickens,
-        cost: state.farm.whickenCost,
-        amount: state.filter.purchaseAmount,
-        description: state.farm.whickenDescription,
-        wheat: state.game.wheat
-    }));
-    const totalCost = getTotalCost(cost, amount, WhickenCostMultiplier);
-    const canUpgrade = wheat >= totalCost;
+    const state = useSelector((state: RootState) => state);
+    const totalCost = getTotalCost(state.farm.whickenCost, state.filter.purchaseAmount, WhickenCostMultiplier);
+    const canUpgrade = state.game.wheat >= totalCost;
 
     const upgradeAction = () => {
         if (canUpgrade) {
             dispatch(spendWheat(totalCost));
-            dispatch(upgradeWhickens(amount));
+            dispatch(upgradeWhickens(state.filter.purchaseAmount));
         }
     }
 
     return (
         <FarmTemplate
             title="Whickens"
-            count={whickens}
+            count={state.farm.whickens}
             cost={totalCost}
-            description={description}
+            description={state.farm.whickenDescription}
             upgradeAction={upgradeAction}
             canUpgrade={canUpgrade}
+            wps={getWhickenWPS(state)}
+            totalWPS={getTotalWPS(state)}
         />
     );
 }

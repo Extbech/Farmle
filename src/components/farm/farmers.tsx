@@ -5,35 +5,31 @@ import { upgradeFarmers } from "../../store/farmSlice";
 import { FarmTemplate } from "./farmTemplate";
 import { getTotalCost } from "../../logic/farmCostLogic";
 import { FarmersCostMultiplier } from "../../configuration/gameConstants";
+import { getFarmerWPS, getTotalWPS } from "../../logic/gameLogic";
 
 export const Farmers = () => {
     const dispatch = useDispatch();
-    
-    const { farmers, cost, amount, description, wheat } = useSelector((state: RootState) => ({
-        farmers: state.farm.farmers,
-        cost: state.farm.farmerCost,
-        amount: state.filter.purchaseAmount,
-        description: state.farm.farmerDescription,
-        wheat: state.game.wheat
-    }));
-    const totalCost = getTotalCost(cost, amount, FarmersCostMultiplier);
-    const canUpgrade = wheat >= totalCost;
+    const state = useSelector((state: RootState) => state);
+    const totalCost = getTotalCost(state.farm.farmerCost, state.filter.purchaseAmount, FarmersCostMultiplier);
+    const canUpgrade = state.game.wheat >= totalCost;
 
     const upgradeAction = () => {
         if (canUpgrade) {
             dispatch(spendWheat(totalCost));
-            dispatch(upgradeFarmers(amount));
+            dispatch(upgradeFarmers(state.filter.purchaseAmount));
         }
     }
 
     return (
         <FarmTemplate
             title="Farmers"
-            count={farmers}
+            count={state.farm.farmers}
             cost={totalCost}
-            description={description}
+            description={state.farm.farmerDescription}
             upgradeAction={upgradeAction}
             canUpgrade={canUpgrade}
+            wps={getFarmerWPS(state)}
+            totalWPS={getTotalWPS(state)}
         />
     )
 }

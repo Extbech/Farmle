@@ -8,19 +8,41 @@ import { getBarnTotalMultPurchased, getBaseTotalMultPurchased, getFarmerTotalMul
  * @returns Total Wheat Per Second (WPS) with all modifiers applied
  */
 export const getTotalWPS = (state: RootState): number => {
-    const baseWPS = state.game.wps * getBaseTotalMultPurchased(state);
 
-    const fertilizerWPS = state.farm.fertilizer * state.farm.fertilizerWPSValue * getFertilizerTotalMultPurchased(state);
+    return getBaseWPS(state) * (
+        getFertilizerWPS(state) + 
+        getFarmerWPS(state) + 
+        getTractorWPS(state) + 
+        getBarnWPS(state) + 
+        getWhickenWPS(state) + 
+        getWowWPS(state)
+    );
+};
 
-    const whickenWPS = state.farm.whickens * state.farm.whickenWPSValue * getWhickensTotalMultPurchased(state);
+export const getBaseWPS = (state: RootState): number => {
+    return state.game.wps * getBaseTotalMultPurchased(state);
+};
 
-    const wowWPS = state.farm.wows * state.farm.wowWPSValue * getWowsTotalMultPurchased(state);
+export const getFertilizerWPS = (state: RootState): number => {
+    return state.farm.fertilizer * state.farm.fertilizerWPSValue * getFertilizerTotalMultPurchased(state);
+};
 
-    const farmersWPS = state.farm.farmers * state.farm.farmerWPSValue * getFarmerTotalMultPurchased(state);
+export const getWhickenWPS = (state: RootState): number => {
+    return state.farm.whickens * state.farm.whickenWPSValue * getWhickensTotalMultPurchased(state);
+};
 
-    const tractorWPS = state.farm.tractors * state.farm.tractorWPSValue * getTractorTotalMultPurchased(state);
+export const getWowWPS = (state: RootState): number => {
+    return state.farm.wows * state.farm.wowWPSValue * getWowsTotalMultPurchased(state);
+};
 
-    const barnWPS = state.farm.barns * state.farm.barnWPSValue * getBarnTotalMultPurchased(state);
+export const getFarmerWPS = (state: RootState): number => {
+    return state.farm.farmers * state.farm.farmerWPSValue * getFarmerTotalMultPurchased(state);
+};
 
-    return baseWPS * (fertilizerWPS + farmersWPS + tractorWPS + barnWPS + whickenWPS + wowWPS);
+export const getTractorWPS = (state: RootState): number => {
+    return state.farm.tractors * state.farm.tractorWPSValue * getTractorTotalMultPurchased(state);
+};
+
+export const getBarnWPS = (state: RootState): number => {
+    return state.farm.barns * state.farm.barnWPSValue * getBarnTotalMultPurchased(state);
 };

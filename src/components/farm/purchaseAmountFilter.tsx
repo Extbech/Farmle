@@ -11,8 +11,8 @@ export const PurchaseAmountFilter = () => {
         dispatch(updatePurchaseAmount());
     };
     return (
-        <Box sx={{ mx: 4, display: 'flex', justifyContent: 'end', mt: 2 }}>
-            <Button variant="contained" color="primary" sx={{width: '100px'}} onClick={handlePurchaseAmountClick}>
+        <Box sx={{ mx: 4, display: 'flex', justifyContent: 'end', mt: 2}}>
+            <Button variant="text" color="primary" sx={{width: '100px'}} onClick={handlePurchaseAmountClick}>
                 <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                     {purchaseAmount}x
                 </Typography>

@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Typography } from "@mui/material"
+import { Box, Button, Paper, Stack, Typography } from "@mui/material"
 import { FormatNumber } from "../../helper/numberFormatter";
 import GrassIcon from '@mui/icons-material/Grass';
 
@@ -9,14 +9,27 @@ export type farmTemplateProps = {
     description: string;
     upgradeAction: () => void;
     canUpgrade: boolean;
+    wps: number;
+    totalWPS: number;
 }
 
-export const FarmTemplate = ({ title, count, cost, description, upgradeAction, canUpgrade }: farmTemplateProps) => {
-
+export const FarmTemplate = ({ title, count, cost, description, upgradeAction, canUpgrade, wps, totalWPS }: farmTemplateProps) => {
+    const wpsPercent = totalWPS > 0 ? ((wps / totalWPS) * 100).toFixed(1) : "0";
+    
     return (
-        <Paper elevation={3} sx={{ padding: 2, margin: 2, display: 'flex', flexDirection: 'column'}}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="h6">{title}</Typography>
+        <Paper elevation={1} sx={{ padding: 2, margin: 2, display: 'flex', flexDirection: 'column', backgroundColor: '#f0f0f0' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                    <Stack direction="row" spacing={1} alignItems="center">
+                        <Typography variant="h6" sx={{minWidth: '120px'}}>{title}</Typography>
+                        <Typography variant="body1" color="text.secondary" sx={{ mt: 0.5 }}>
+                            WPS: {FormatNumber(wps)} ({wpsPercent}% of total)
+                        </Typography>
+                    </Stack>
+                    <Typography variant="body1" color="text.secondary" sx={{ mt: 0.2 }}>
+                        {description}
+                    </Typography>
+                </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                     <Typography variant="h6">{count}x</Typography>
                     <Button
@@ -31,9 +44,6 @@ export const FarmTemplate = ({ title, count, cost, description, upgradeAction, c
                         </Button>
                 </Box>
             </Box>
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 0.2 }}>
-                {description}
-            </Typography>
         </Paper>
     )
 }
