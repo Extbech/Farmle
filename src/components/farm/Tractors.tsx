@@ -7,7 +7,6 @@ import { FarmTemplate } from "./farmTemplate";
 import { getTotalCost } from "../../logic/farmCostLogic";
 import { TractorCostMultiplier } from "../../configuration/gameConstants";
 import { getTractorWPS, getTotalWPS } from "../../logic/gameLogic";
-import AgricultureIcon from '@mui/icons-material/Agriculture';
 
 export const Tractors = () => {
     const dispatch = useDispatch();
