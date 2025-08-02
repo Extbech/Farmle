@@ -8,20 +8,20 @@ export const SideBar = () => {
                     Farmle
                 </Typography>
                 <Box sx={{display: 'flex', flexDirection: 'column', width: '100%', gap: 3, flexGrow: 1}}>
-                <Button variant="contained" color="primary" href="/" fullWidth sx={{ height: '45px'}}>
+                <Button variant="contained" color="primary" href="/Farmle/" fullWidth sx={{ height: '45px'}}>
                     <Typography variant="h6">Farm</Typography>
                 </Button>
-                <Button variant="contained" color="primary" href="/upgrades" fullWidth sx={{ height: '45px'}}>
+                <Button variant="contained" color="primary" href="/Farmle/upgrades" fullWidth sx={{ height: '45px'}}>
                     <Typography variant="h6">Upgrades</Typography>
                 </Button>
-                <Button variant="contained" color="primary" href="/achievements" fullWidth sx={{ height: '45px'}}>
+                <Button variant="contained" color="primary" href="/Farmle/achievements" fullWidth sx={{ height: '45px'}}>
                     <Typography variant="h6">Achievements</Typography>
                 </Button>
-                <Button variant="contained" color="primary" href="/prestige" fullWidth sx={{ height: '45px'}}>
+                <Button variant="contained" color="primary" href="/Farmle/prestige" fullWidth sx={{ height: '45px'}}>
                     <Typography variant="h6">Prestige</Typography>
                 </Button>
                 </Box>
-                <Button variant="contained" color="primary" href="/settings" fullWidth sx={{ height: '45px'}}>
+                <Button variant="contained" color="primary" href="/Farmle/settings" fullWidth sx={{ height: '45px'}}>
                     <Typography variant="h6">Settings</Typography>
                 </Button>
                 {/* Add navigation links or buttons here to create more pages.*/}

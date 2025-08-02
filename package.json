@@ -1,5 +1,6 @@
 {
   "name": "idle-game",
+  "homepage": "https://extbech.github.io/Farmle/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -35,6 +36,5 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
     "vite": "^7.0.4"
-  },
-  "homepage": "https://extbech.github.io/Farmle/"
+  }
 }
