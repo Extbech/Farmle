@@ -6,7 +6,8 @@ import { upgradeBarns } from "../../store/farmSlice";
 import { FarmTemplate } from "./farmTemplate";
 import { BarnCostMultiplier } from "../../configuration/gameConstants";
 import { getTotalCost } from "../../logic/farmCostLogic";
-import { getBarnWPS, getTotalWPS } from "../../logic/gameLogic";
+import { getBarnWPS, getBarnWPSPerUnit, getTotalWPS } from "../../logic/gameLogic";
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
 export const Barns = () => {
     const dispatch = useDispatch();
@@ -30,8 +31,10 @@ export const Barns = () => {
             description={state.farm.barnDescription}
             upgradeAction={upgradeAction}
             canUpgrade={canUpgrade}
+            wpsPerUnit={getBarnWPSPerUnit(state)}
             wps={getBarnWPS(state)}
             totalWPS={getTotalWPS(state)}
+            farmIcon={<AccountBalanceIcon />}
         />
     )
 }

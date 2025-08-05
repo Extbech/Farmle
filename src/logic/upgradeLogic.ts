@@ -11,7 +11,7 @@ export const getAllUpgradesSortByPurchased = (state: RootState): Upgrade[] => {
 };
 
 export const getAllAvailableUpgradesSortedByCost = (state: RootState): Upgrade[] => {
-    const availableUpgrades = Object.values(state.upgrade).flatMap((upgradeType) => (upgradeType as Upgrade[]).filter((upgrade) => !upgrade.purchased));
+    const availableUpgrades = Object.values(state.upgrade).flatMap((upgradeType) => (upgradeType as Upgrade[]).filter((upgrade) => !upgrade.purchased && upgrade.available));
     return availableUpgrades.sort((a, b) => a.cost - b.cost);
 };
 

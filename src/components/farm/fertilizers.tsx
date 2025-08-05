@@ -5,7 +5,8 @@ import { spendWheat } from "../../store/gameSlice";
 import { upgradeFertilizer } from "../../store/farmSlice";
 import { getTotalCost } from "../../logic/farmCostLogic";
 import { FertilizerCostMultiplier } from "../../configuration/gameConstants";
-import { getFertilizerWPS, getTotalWPS } from "../../logic/gameLogic";
+import { getFertilizerWPS, getFertilizerWPSPerUnit, getTotalWPS } from "../../logic/gameLogic";
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
 export const Fertilizers = () => {
     const dispatch = useDispatch();
@@ -28,8 +29,10 @@ export const Fertilizers = () => {
             description={state.farm.fertilizerDescription}
             upgradeAction={upgradeAction}
             canUpgrade={canUpgrade}
+            wpsPerUnit={getFertilizerWPSPerUnit(state)}
             wps={getFertilizerWPS(state)}
             totalWPS={getTotalWPS(state)}
+            farmIcon={<AccountBalanceIcon />}
         />
     )
 }

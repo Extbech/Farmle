@@ -9,11 +9,13 @@ export type farmTemplateProps = {
     description: string;
     upgradeAction: () => void;
     canUpgrade: boolean;
+    wpsPerUnit: number;
     wps: number;
     totalWPS: number;
+    farmIcon?: React.ReactNode;
 }
 
-export const FarmTemplate = ({ title, count, cost, description, upgradeAction, canUpgrade, wps, totalWPS }: farmTemplateProps) => {
+export const FarmTemplate = ({ title, count, cost, description, upgradeAction, canUpgrade, wpsPerUnit, wps, totalWPS, farmIcon }: farmTemplateProps) => {
     const wpsPercent = totalWPS > 0 ? ((wps / totalWPS) * 100).toFixed(1) : "0";
     
     return (
@@ -21,17 +23,18 @@ export const FarmTemplate = ({ title, count, cost, description, upgradeAction, c
             <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                     <Stack direction="row" spacing={1} alignItems="center">
-                        <Typography variant="h6" sx={{minWidth: '120px'}}>{title}</Typography>
-                        <Typography variant="body1" color="text.secondary" sx={{ mt: 0.5 }}>
-                            WPS: {FormatNumber(wps)} ({wpsPercent}% of total)
+                        {farmIcon}
+                        <Typography variant="h6" sx={{minWidth: '120px', userSelect: 'none'}}>{title}</Typography>
+                        <Typography variant="body1" color="text.secondary" sx={{ mt: 0.5, userSelect: 'none' }}>
+                            WPS: {FormatNumber(wpsPerUnit)} / WPS Total: {FormatNumber(wps)} / WPS%: {wpsPercent}%
                         </Typography>
                     </Stack>
-                    <Typography variant="body1" color="text.secondary" sx={{ mt: 0.2 }}>
+                    <Typography variant="body1" color="text.secondary" sx={{ mt: 0.2, userSelect: 'none' }}>
                         {description}
                     </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                    <Typography variant="h6">{count}x</Typography>
+                    <Typography variant="h6" sx={{ userSelect: 'none' }}>{count}x</Typography>
                     <Button
                         variant="contained"
                         color="primary"

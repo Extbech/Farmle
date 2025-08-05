@@ -1,18 +1,51 @@
 import { useDispatch, useSelector } from "react-redux";
 import { incrementWheat } from "../store/gameSlice";
 import { TickRateInMilliseconds } from "../configuration/gameConstants";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type { RootState } from "../store/store";
 import { getTotalWPS } from "../logic/gameLogic";
+import { updateWheatAchievements, updateWheatAchievementsTrigger } from "../store/achievementSlice";
+import { getUntriggeredCompletedAchievements } from "../logic/achievementLogic";
+import { enqueueSnackbar } from "notistack";
 
 export const TickLoop = () => {
     const dispatch = useDispatch();
     const state = useSelector((state: RootState) => state);
+    const stateRef = useRef(state);
+    const dispatchRef = useRef(dispatch);
+    dispatchRef.current = dispatch;
+    stateRef.current = state;
     useEffect(() => {
         const interval = setInterval(() => {
-            dispatch(incrementWheat(getTotalWPS(state)));
+            const currentState = stateRef.current;
+            dispatchRef.current(incrementWheat(getTotalWPS(currentState)));
+            dispatchRef.current(updateWheatAchievements({ wps: getTotalWPS(currentState), wheat: currentState.game.wheat }));
         }, TickRateInMilliseconds);
-
         return () => clearInterval(interval);
-    }, [dispatch, state]);
+    }, []);
 };
+
+export const CheckForCompletedWheatAchievements = () => {
+    const dispatch = useDispatch();
+    const state = useSelector((state: RootState) => state);
+    const stateRef = useRef(state);
+    const dispatchRef = useRef(dispatch);
+    dispatchRef.current = dispatch;
+    stateRef.current = state;
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const currentState = stateRef.current;
+            const completedAchievements = getUntriggeredCompletedAchievements(currentState);
+            if (completedAchievements.length === 0) return;
+            completedAchievements.forEach(achievement => {
+                enqueueSnackbar(achievement.description, {
+                    variant: 'success', anchorOrigin: {
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                    }});
+            });
+            dispatchRef.current(updateWheatAchievementsTrigger(completedAchievements));
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
+}

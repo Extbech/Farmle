@@ -5,7 +5,8 @@ import { upgradeWows } from "../../store/farmSlice";
 import { FarmTemplate } from "./farmTemplate";
 import { getTotalCost } from "../../logic/farmCostLogic";
 import { WowCostMultiplier } from "../../configuration/gameConstants";
-import { getTotalWPS, getWowWPS } from "../../logic/gameLogic";
+import { getTotalWPS, getWowWPS, getWowWPSPerUnit } from "../../logic/gameLogic";
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
 export const Wows = () => {
     const dispatch = useDispatch();
@@ -28,8 +29,10 @@ export const Wows = () => {
             description={state.farm.wowDescription}
             upgradeAction={upgradeAction}
             canUpgrade={canUpgrade}
+            wpsPerUnit={getWowWPSPerUnit(state)}
             wps={getWowWPS(state)}
             totalWPS={getTotalWPS(state)}
+            farmIcon={<AccountBalanceIcon />}
         />
     )
 }

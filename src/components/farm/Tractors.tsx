@@ -6,7 +6,8 @@ import { upgradeTractors } from "../../store/farmSlice";
 import { FarmTemplate } from "./farmTemplate";
 import { getTotalCost } from "../../logic/farmCostLogic";
 import { TractorCostMultiplier } from "../../configuration/gameConstants";
-import { getTractorWPS, getTotalWPS } from "../../logic/gameLogic";
+import { getTractorWPS, getTotalWPS, getTractorWPSPerUnit } from "../../logic/gameLogic";
+import AgricultureIcon from '@mui/icons-material/Agriculture';
 
 export const Tractors = () => {
     const dispatch = useDispatch();
@@ -29,8 +30,10 @@ export const Tractors = () => {
             description={state.farm.tractorDescription}
             upgradeAction={upgradeAction}
             canUpgrade={canUpgrade}
+            wpsPerUnit={getTractorWPSPerUnit(state)}
             wps={getTractorWPS(state)}
             totalWPS={getTotalWPS(state)}
+            farmIcon={<AgricultureIcon />}
         />
     )
 }

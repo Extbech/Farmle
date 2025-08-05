@@ -7,6 +7,7 @@ export type Upgrade = {
     cost: number;
     multiplier: number;
     purchased: boolean;
+    available: boolean;
     description: string;
 };
 
@@ -20,7 +21,18 @@ const initialState = {
             cost: 100,
             multiplier: 2.0,
             purchased: false,
+            available: true,
             description: "Increases the productivity of your fertilizers by 100%."
+        },
+        {
+            id: 1,
+            internalId: 2,
+            name: "Advanced Fertilizer",
+            cost: 1000,
+            multiplier: 3.0,
+            purchased: false,
+            available: false,
+            description: "Increases the productivity of your fertilizers by 200%."
         }
     ],
     /// WHICKENS
@@ -32,6 +44,7 @@ const initialState = {
             cost: 500,
             multiplier: 2.0,
             purchased: false,
+            available: true,
             description: "Increases the productivity of your whickens by 100%."
         }
     ],
@@ -44,6 +57,7 @@ const initialState = {
             cost: 2_000,
             multiplier: 2.0,
             purchased: false,
+            available: true,
             description: "Increases the productivity of your wows by 100%."
         }
     ],
@@ -56,6 +70,7 @@ const initialState = {
         cost: 10_000,
         multiplier: 2.0,
         purchased: false,
+        available: true,
         description: "Increases the productivity of your farmers by 100%."
     }
     ],
@@ -68,6 +83,7 @@ const initialState = {
             cost: 100_000,
             multiplier: 2.0,
             purchased: false,
+            available: true,
             description: "Increases the productivity of your tractors by 100%."
         }
     ],
@@ -80,6 +96,7 @@ const initialState = {
             cost: 1_000_000,
             multiplier: 2.0,
             purchased: false,
+            available: true,
             description: "Increases the productivity of your barns by 100%."
         }
     ],
@@ -91,6 +108,7 @@ const initialState = {
             cost: 10_000_000,
             multiplier: 1.5,
             purchased: false,
+            available: true,
             description: "50% increase to all wheat production."
         }
     ]
@@ -106,6 +124,10 @@ export const upgradeSlice = createSlice({
             const upgrade = upgradeType.find((item) => item.internalId === action.payload.internalId);
             if (upgrade) {
                 upgrade.purchased = true;
+                const nextUpgrade = upgradeType.find((item) => item.internalId === action.payload.internalId + 1);
+                if (nextUpgrade) {
+                    nextUpgrade.available = true;
+                }
             }
         }
     },
