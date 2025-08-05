@@ -20,6 +20,11 @@ export const SideBar = () => {
                 <Button variant="contained" color="primary" href="/Farmle/prestige" fullWidth sx={{ height: '45px'}}>
                     <Typography variant="h6">Prestige</Typography>
                 </Button>
+                {process.env.NODE_ENV !== 'production' && (
+                    <Button variant="contained" color="primary" href="/Farmle/dev" fullWidth sx={{ height: '45px'}}>
+                        <Typography variant="h6">Development</Typography>
+                    </Button>
+                )}
                 </Box>
                 <Button variant="contained" color="primary" href="/Farmle/settings" fullWidth sx={{ height: '45px'}}>
                     <Typography variant="h6">Settings</Typography>
