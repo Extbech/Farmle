@@ -1,8 +1,16 @@
 import type { Achievement } from "../store/achievementSlice";
 import type { RootState } from "../store/store";
 
-export const getAllAchievements = (state: RootState): Achievement[] => state.achievements.wheatAchievements;
+export const getAllAchievements = (state: RootState): Achievement[] => [...state.achievements.wheatAchievements, ...state.achievements.prestigeAchievement];
 
-export const getUntriggeredCompletedAchievements = (state: RootState): Achievement[] => {
-    return getAllAchievements(state).filter(achievement => achievement.completed && !achievement.toastTriggered);
+export const getAllWheatAchievements = (state: RootState): Achievement[] => state.achievements.wheatAchievements;
+
+export const getAllPrestigeAchievements = (state: RootState): Achievement[] => state.achievements.prestigeAchievement;
+
+export const getUntriggeredCompletedWheatAchievements = (state: RootState): Achievement[] => {
+    return getAllWheatAchievements(state).filter(achievement => achievement.completed && !achievement.toastTriggered);
+};
+
+export const getUntriggeredCompletedPrestigeAchievements = (state: RootState): Achievement[] => {
+    return getAllPrestigeAchievements(state).filter(achievement => achievement.completed && !achievement.toastTriggered);
 };

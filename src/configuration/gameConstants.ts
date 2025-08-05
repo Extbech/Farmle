@@ -48,3 +48,9 @@ export const TractorWPSValue = 200.0;
 export const BarnBaseCost = 100000;
 export const BarnCostMultiplier = 1.15;
 export const BarnWPSValue = 1000.0;
+
+
+
+/// PRESTIGE
+export const PrestigeBreakPoint = 100;
+export const PrestigeCostMultiplier = 1.15;

@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TickRateInMilliseconds } from '../configuration/gameConstants';
+import { PrestigeBreakPoint, PrestigeCostMultiplier, TickRateInMilliseconds } from '../configuration/gameConstants';
 
 
 const initialState = {
   wheat: 10,
   wps: 1, // wheat per second
-  prestige: 0,
+  cumulativeWheat: 10,
+  prestigePoints: 0,
+  prestigeBreakPoint: PrestigeBreakPoint
 };
 
 export const gameSlice = createSlice({
@@ -14,12 +16,17 @@ export const gameSlice = createSlice({
   reducers: {
     incrementWheat: (state, action) => {
       state.wheat += action.payload * (TickRateInMilliseconds / 1000 );
+      state.cumulativeWheat += action.payload * (TickRateInMilliseconds / 1000 );
+      if (state.cumulativeWheat >= state.prestigeBreakPoint) {
+        state.prestigePoints ++;
+        state.prestigeBreakPoint *= PrestigeCostMultiplier;
+      }
     },
     increaseWPS: (state, action) => {
         state.wps += action.payload;
     },
     increasePrestige: (state, action) => {
-        state.prestige += action.payload;
+        state.prestigePoints += action.payload;
     },
     spendWheat: (state, action) => {
         if (state.wheat >= action.payload) {

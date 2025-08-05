@@ -10,7 +10,7 @@ export const HeaderGameStats = () => {
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: 10 }}>
-            <Typography variant="h6">Prestige: {state.game.prestige}</Typography>
+            <Typography variant="h6">Prestige Points: {state.game.prestigePoints}</Typography>
             <Typography variant="h6">WPS: {FormatNumber(getTotalWPS(state))}</Typography>
             <Typography variant="h6">
                 <Box component="span" sx={{ display: 'flex', alignItems: 'center' }}>
