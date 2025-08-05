@@ -1,5 +1,4 @@
 import { CheckForCompletedWheatAchievements, TickLoop } from './hooks/gameLogicHook';
-import { SideBar } from './components/sidebar/sideBar';
 import { routes } from './routes';
 import { RouterProvider } from 'react-router';
 import { SnackbarProvider } from 'notistack';
@@ -9,7 +8,6 @@ function App() {
   CheckForCompletedWheatAchievements(); // This will start the achievement check interval
   return (
     <>
-      <SideBar />
       <SnackbarProvider 
       maxSnack={3} 
       autoHideDuration={5000}

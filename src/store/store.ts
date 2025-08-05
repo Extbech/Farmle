@@ -7,13 +7,15 @@ import storage from "redux-persist/lib/storage";
 import { upgradeSlice } from "./upgradeSlice";
 import { filterSlice } from "./filterSlice";
 import { achievementSlice } from "./achievementSlice";
+import { prestigeSlice } from "./prestigeSlice";
 
 const appReducer = combineReducers({
   game: gameSlice.reducer,
   farm: farmSlice.reducer,
   upgrade: upgradeSlice.reducer,
   filter: filterSlice.reducer,
-  achievements: achievementSlice.reducer
+  achievements: achievementSlice.reducer,
+  prestige: prestigeSlice.reducer
 });
 
 // 'any' is used here to allow resetting the entire Redux state

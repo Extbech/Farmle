@@ -11,7 +11,7 @@ export const Dev = () => {
         <Box sx={{ padding: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Typography variant="h4">Development</Typography>
             <Typography variant="body1">Configure your development settings here.</Typography>
-            <Button 
+            <Button
             variant="contained"
             color="primary"
             sx={{ marginTop: 2 }}
