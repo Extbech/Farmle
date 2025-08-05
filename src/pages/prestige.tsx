@@ -28,7 +28,7 @@ export const Prestige = () => {
 
     return (
         <Box sx={{ padding: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'calc(100%)', height: '1000px', background: '#181a1b' }}>
-            <Typography variant="h4" color="white" mr={20}>Prestige</Typography>
+            <Typography variant="h4" color="white">Prestige</Typography>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
