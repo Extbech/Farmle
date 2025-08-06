@@ -46,7 +46,7 @@ export const UpgradeItem = ({ upgrade }: { upgrade: Upgrade }) => {
                 <Typography variant="body1" sx={{ mt: 1 }}>
                     <Box component="span" sx={{ display: 'flex', alignItems: 'center' }}>
                         Wheat: {FormatNumber(upgrade.cost)}
-                        <GrassIcon fontSize="medium" sx={{ color: '#FFD700', ml: 0.2, mb: 0.5 }} />
+                        <GrassIcon fontSize="medium" sx={{ color: (theme) => theme.palette.secondary.main, ml: 0.2, mb: 0.5 }} />
                     </Box>
                 </Typography>
                 <Typography variant="body2">{upgrade.description}</Typography>

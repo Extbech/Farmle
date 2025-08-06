@@ -4,7 +4,8 @@ import { PrestigeBreakPoint, PrestigeCostMultiplier, TickRateInMilliseconds } fr
 
 const initialState = {
   wheat: 10,
-  wps: 1, // wheat per second
+  baseWPS: 1, // wheat per second
+  baseWPC: 1,
   cumulativeWheat: 10,
   prestigePoints: 0,
   prestigeBreakPoint: PrestigeBreakPoint
@@ -22,8 +23,16 @@ export const gameSlice = createSlice({
         state.prestigeBreakPoint *= PrestigeCostMultiplier;
       }
     },
+    incrementWheatByClick: (state) => {
+      state.wheat += state.baseWPC;
+      state.cumulativeWheat += state.baseWPC;
+      if (state.cumulativeWheat >= state.prestigeBreakPoint) {
+        state.prestigePoints ++;
+        state.prestigeBreakPoint *= PrestigeCostMultiplier;
+      }
+    },
     increaseWPS: (state, action) => {
-        state.wps += action.payload;
+        state.baseWPS += action.payload;
     },
     increasePrestige: (state, action) => {
         state.prestigePoints += action.payload;
@@ -39,4 +48,4 @@ export const gameSlice = createSlice({
   },
 });
 
-export const { incrementWheat, increaseWPS: increaseWPS, increasePrestige, spendWheat, reset: resetGame } = gameSlice.actions;
+export const { incrementWheat, incrementWheatByClick, increaseWPS: increaseWPS, increasePrestige, spendWheat, reset: resetGame } = gameSlice.actions;

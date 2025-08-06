@@ -15,7 +15,7 @@ export const HeaderGameStats = () => {
             <Typography variant="h6">
                 <Box component="span" sx={{ display: 'flex', alignItems: 'center' }}>
                     Wheat: {FormatNumber(state.game.wheat)}
-                    <GrassIcon fontSize="medium" sx={{ color: '#FFD700', ml: 0.5, mb: 0.4 }} />
+                    <GrassIcon fontSize="medium" sx={{ color: (theme) => theme.palette.secondary.main, ml: 0.5, mb: 0.4 }} />
                 </Box>
             </Typography>
         </Box>

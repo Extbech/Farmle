@@ -41,7 +41,7 @@ export const FarmTemplate = ({ title, count, cost, description, upgradeAction, c
                         sx={{ marginLeft: 2, width: '100px' }}
                         onClick={upgradeAction}
                         disabled={!canUpgrade}
-                        endIcon={<GrassIcon fontSize="medium" sx={{ color: canUpgrade ? '#FFD700' : '#888', mb: 0.4 }} />}
+                        endIcon={<GrassIcon fontSize="medium" sx={{ color: (theme) => canUpgrade ? theme.palette.secondary.main : theme.palette.text.disabled, mb: 0.4 }} />}
                     >
                         {FormatNumber(cost)}
                         </Button>

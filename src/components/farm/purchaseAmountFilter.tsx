@@ -12,7 +12,7 @@ export const PurchaseAmountFilter = () => {
     };
     return (
         <Box sx={{ mx: 4, display: 'flex', justifyContent: 'end', mt: 2}}>
-            <Button variant="text" color="primary" sx={{width: '100px'}} onClick={handlePurchaseAmountClick}>
+            <Button variant="outlined" color="primary" sx={{width: '100px'}} onClick={handlePurchaseAmountClick}>
                 <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                     {purchaseAmount}x
                 </Typography>

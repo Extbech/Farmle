@@ -14,7 +14,7 @@ export const Header = () => {
         }
     };
     return (
-        <AppBar position="sticky" sx={{marginLeft: 0, padding: 0, height: '70px', backgroundColor: '#1d2137ff'}}>
+        <AppBar position="sticky" sx={{marginLeft: 0, padding: 0, height: '70px', backgroundColor: (theme) => theme.palette.sidebar.main, borderRadius: 0}}>
             <Toolbar>
                 <Box sx={{flexGrow: 1}}>
                 <HeaderGameStats />

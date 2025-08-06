@@ -2,7 +2,7 @@ import { Box, Typography, LinearProgress } from "@mui/material";
 import { getAllUpgradesSortByPurchased } from "../logic/upgradeLogic";
 import type { RootState } from "../store/store";
 import { useSelector } from "react-redux";
-import { UpgradeHistoryItem } from "../components/upgrades/upgradeHistoryItem";
+import { UpgradeContainer } from "../components/upgrades/upgradeContainer";
 
 export const Upgrades = () => {
     const state = useSelector((state: RootState) => state);
@@ -27,11 +27,7 @@ export const Upgrades = () => {
                     sx={{ height: 14, borderRadius: 6, backgroundColor: '#eee', '& .MuiLinearProgress-bar': { backgroundColor: '#1976d2' } }}
                 />
             </Box>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, padding: 2 }}>
-                {upgrades.map((upgrade) => (
-                    <UpgradeHistoryItem key={upgrade.id} upgrade={upgrade} />
-                ))}
-            </Box>
+            <UpgradeContainer upgrades={upgrades} />
         </Box>
     )
 };

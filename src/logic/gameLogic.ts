@@ -21,7 +21,7 @@ export const getTotalWPS = (state: RootState): number => {
 
 
 export const getBaseWPS = (state: RootState): number => {
-    return state.game.wps * getBaseTotalMultPurchased(state);
+    return state.game.baseWPS * getBaseTotalMultPurchased(state);
 };
 
 

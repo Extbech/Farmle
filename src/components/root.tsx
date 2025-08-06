@@ -8,11 +8,11 @@ export const Root = () => {
     return (
         <Box>
             <SideBar />
-            <Box sx={{marginLeft: '275px'}}>
+            <Box sx={{marginLeft: '250px', mr: '5px'}}>
                 <Header />
                 <SnackbarProvider />
-                <Box sx={{display: 'flex', flexDirection: 'column', mx: 1}}>
-                    < Outlet />
+                <Box sx={{display: 'flex', flexDirection: 'column'}}>
+                    <Outlet />
                 </Box>
             </Box>
         </Box>

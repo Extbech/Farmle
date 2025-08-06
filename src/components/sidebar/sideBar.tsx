@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 export const SideBar = () => {
     const location = useLocation();
     return (
-        <Drawer variant="permanent" anchor="left" sx={{ '& .MuiDrawer-paper': { backgroundColor: '#1d2137ff', color: '#fff' } }}>
+        <Drawer variant="permanent" anchor="left" sx={{ '& .MuiDrawer-paper': { backgroundColor: (theme) => theme.palette.sidebar.main , color: '#fff', borderRadius: 0 } }}>
             <Box sx={{ width: '250px', padding: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
                 <Typography variant="h4" sx={{ marginBottom: 3 }} alignSelf={'center'}>
                     Farmle
