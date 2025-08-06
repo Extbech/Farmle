@@ -1,8 +1,14 @@
 import { Box, Button, Drawer, Typography } from "@mui/material";
 import { useLocation } from "react-router";
+import { purchasableUpgradeExists } from "../../logic/upgradeLogic";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store/store";
 
 export const SideBar = () => {
     const location = useLocation();
+    const state = useSelector((state: RootState) => state);
+    const upgradeExists = purchasableUpgradeExists(state);
+
     return (
         <Drawer variant="permanent" anchor="left" sx={{ '& .MuiDrawer-paper': { backgroundColor: (theme) => theme.palette.sidebar.main , color: '#fff', borderRadius: 0 } }}>
             <Box sx={{ width: '250px', padding: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
@@ -10,53 +16,59 @@ export const SideBar = () => {
                     Farmle
                 </Typography>
                 <Box sx={{display: 'flex', flexDirection: 'column', width: '100%', gap: 3, flexGrow: 1}}>
-                <Button
-                variant={location.pathname === "/Farmle/" ? "contained" : "outlined"}
-                color="primary" 
-                href="/Farmle/" 
-                fullWidth 
-                sx={{ height: '45px'}}
-                >
-                    <Typography variant="h6">Farm</Typography>
-                </Button>
-                <Button 
-                variant={location.pathname === "/Farmle/upgrades" ? "contained" : "outlined"}
-                color="primary" 
-                href="/Farmle/upgrades" 
-                fullWidth 
-                sx={{ height: '45px'}}
-                >
-                    <Typography variant="h6">Upgrades</Typography>
-                </Button>
-                <Button 
-                variant={location.pathname === "/Farmle/achievements" ? "contained" : "outlined"}
-                color="primary" 
-                href="/Farmle/achievements" 
-                fullWidth 
-                sx={{ height: '45px'}}
-                >
-                    <Typography variant="h6">Achievements</Typography>
-                </Button>
-                <Button 
-                variant={location.pathname === "/Farmle/prestige" ? "contained" : "outlined"}
-                color="primary" 
-                href="/Farmle/prestige" 
-                fullWidth 
-                sx={{ height: '45px'}}
-                >
-                    <Typography variant="h6">Prestige</Typography>
-                </Button>
-                {process.env.NODE_ENV !== 'production' && (
-                    <Button 
-                    variant={location.pathname === "/Farmle/dev" ? "contained" : "outlined"}
+                    <Button
+                    variant={location.pathname === "/Farmle/" ? "contained" : "outlined"}
                     color="primary" 
-                    href="/Farmle/dev" 
+                    href="/Farmle/" 
                     fullWidth 
                     sx={{ height: '45px'}}
                     >
-                        <Typography variant="h6">Development</Typography>
+                        <Typography variant="h6">Farm</Typography>
                     </Button>
-                )}
+                    <Button 
+                    variant={location.pathname === "/Farmle/upgrades" ? "contained" : "outlined"}
+                    color="primary" 
+                    href="/Farmle/upgrades" 
+                    fullWidth 
+                    sx={{ 
+                        height: '45px',
+                        border: upgradeExists ? '2px solid #ffd54f' : undefined,
+                        boxShadow: upgradeExists ? '0 0 10px 2px #ffd54f' : undefined,
+                        zIndex: upgradeExists ? 1 : undefined,
+                        transition: 'box-shadow 0.2s, border 0.2s',
+                    }}
+                    >
+                        <Typography variant="h6">Upgrades</Typography>
+                    </Button>
+                    <Button 
+                    variant={location.pathname === "/Farmle/achievements" ? "contained" : "outlined"}
+                    color="primary" 
+                    href="/Farmle/achievements" 
+                    fullWidth 
+                    sx={{ height: '45px'}}
+                    >
+                        <Typography variant="h6">Achievements</Typography>
+                    </Button>
+                    <Button 
+                    variant={location.pathname === "/Farmle/prestige" ? "contained" : "outlined"}
+                    color="primary" 
+                    href="/Farmle/prestige" 
+                    fullWidth 
+                    sx={{ height: '45px'}}
+                    >
+                        <Typography variant="h6">Prestige</Typography>
+                    </Button>
+                    {process.env.NODE_ENV !== 'production' && (
+                        <Button 
+                        variant={location.pathname === "/Farmle/dev" ? "contained" : "outlined"}
+                        color="primary" 
+                        href="/Farmle/dev" 
+                        fullWidth 
+                        sx={{ height: '45px'}}
+                        >
+                            <Typography variant="h6">Development</Typography>
+                        </Button>
+                    )}
                 </Box>
                 <Button 
                 variant={location.pathname === "/Farmle/settings" ? "contained" : "outlined"}

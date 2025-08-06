@@ -10,7 +10,7 @@ import { FarmClickerArea } from "../components/farmClicker/farmClickerArea"
 
 export const Farm = () => {
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', overflowY: 'auto', overflowX: 'hidden', maxHeight: '100%' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', overflowY: 'auto', overflowX: 'hidden', minHeight: '100px', background: (theme) => theme.palette.background.default}}>
             
             {/* Farm Clicker Area */}
             <FarmClickerArea />

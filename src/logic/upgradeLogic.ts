@@ -2,22 +2,36 @@ import { MaxItems } from "../configuration/gameConstants";
 import type { RootState } from "../store/store";
 import type { Upgrade } from "../store/upgradeSlice";
 
-export const getAllUpgradesSortByPurchased = (state: RootState): Upgrade[] => {
-    return Object.values(state.upgrade).flatMap((upgradeType) => upgradeType as Upgrade[]).sort((a, b) => {
+export const getAllUpgradesSorted = (state: RootState): Upgrade[] => {
+    const sortedByPurchased = Object.values(state.upgrade).flatMap((upgradeType) => upgradeType as Upgrade[]).sort((a, b) => {
         if (a.purchased && !b.purchased) return -1; // a is purchased, b is not
         if (!a.purchased && b.purchased) return 1; // b is purchased, a is not
         return a.cost - b.cost; // both are purchased or not, sort by cost
     });
+    const sortedByAvailable = sortedByPurchased.sort((a, b) => {
+        if (a.available && !b.available) return -1; // a is available, b is not
+        if (!a.available && b.available) return 1; // b is available, a is not
+        return 0; // both are available or not, maintain order
+    });
+    return sortedByAvailable;
 };
 
-export const getAllAvailableUpgradesSortedByCost = (state: RootState): Upgrade[] => {
+export const getAllPurchasableUpgradesSortedByCost = (state: RootState): Upgrade[] => {
     const availableUpgrades = Object.values(state.upgrade).flatMap((upgradeType) => (upgradeType as Upgrade[]).filter((upgrade) => !upgrade.purchased && upgrade.available));
     return availableUpgrades.sort((a, b) => a.cost - b.cost);
 };
 
+export const getAvailableAndPurchasedUpgradesSortByCost = (state: RootState): Upgrade[] => {
+    const availableUpgrades = Object.values(state.upgrade).flatMap((upgradeType) => (upgradeType as Upgrade[]).filter((upgrade) => upgrade.available));
+    return availableUpgrades.sort((a, b) => a.cost - b.cost);
+};
+
+export const purchasableUpgradeExists = (state: RootState): boolean => {
+    return getAllPurchasableUpgradesSortedByCost(state).some((upgrade) => upgrade.cost <= state.game.wheat);
+};
 
 export const getAvailableUpgradesUnderMaxItems = (state: RootState): Upgrade[] => {
-    const allUpgrades = getAllAvailableUpgradesSortedByCost(state);
+    const allUpgrades = getAllPurchasableUpgradesSortedByCost(state);
     return allUpgrades.slice(0, MaxItems);
 };
 

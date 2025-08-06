@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
 import { Background, Controls, ReactFlow } from "@xyflow/react";
@@ -28,7 +28,6 @@ export const Prestige = () => {
 
     return (
         <Box sx={{ padding: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'calc(100%)', height: '1000px', background: '#181a1b' }}>
-            <Typography variant="h4" color="white">Prestige</Typography>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
