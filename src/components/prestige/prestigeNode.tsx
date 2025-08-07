@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Handle, Position } from "@xyflow/react";
 import { memo } from "react";
 import type { Prestige } from "../../store/prestigeSlice";

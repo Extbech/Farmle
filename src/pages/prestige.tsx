@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
-import { Background, Controls, ReactFlow } from "@xyflow/react";
+import { Background, ReactFlow } from "@xyflow/react";
 import '@xyflow/react/dist/style.css';
 import { PrestigeNode } from "../components/prestige/prestigeNode";
 
@@ -29,7 +29,7 @@ export const Prestige = () => {
         {id: 'n2-n5',source: 'n2',target: 'n5',style: { stroke: prestigeStore.data.dirtCheap.available ? '#c50b91ff' : '#aaa', strokeWidth: 3 }}
     ];
 
-    const handleNodeClick = (event: any, node: any) => {
+    const handleNodeClick = (_event: any, node: any) => {
         console.log(node.data);
         alert(`Node ${node.data.name} was clicked!`);
     };
