@@ -15,6 +15,9 @@ export const Achievements = () => {
     return (
         <Box sx={{ padding: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', width: '90%', m: 2 }}>
+                <Typography variant="h6" alignSelf='center' gutterBottom>
+                    Achievements help boost you base wheat production by 1% per achievement accomplished.
+                </Typography>
                 <Typography variant="h6" alignSelf='center' sx={{ mb: 0.5 }}>
                     Progress: {completedAchievements} / {total} achievements completed
                 </Typography>

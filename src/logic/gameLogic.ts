@@ -1,4 +1,5 @@
 import type { RootState } from "../store/store";
+import { getAchievementBaseWheatMultiplier } from "./achievementLogic";
 import { getBarnTotalMultPurchased, getBaseTotalMultPurchased, getFarmerTotalMultPurchased, getFertilizerTotalMultPurchased, getTractorTotalMultPurchased, getWhickensTotalMultPurchased, getWowsTotalMultPurchased } from "./upgradeLogic";
 
 /**
@@ -21,7 +22,7 @@ export const getTotalWPS = (state: RootState): number => {
 
 
 export const getBaseWPS = (state: RootState): number => {
-    return state.game.baseWPS * getBaseTotalMultPurchased(state);
+    return state.game.baseWPS * getBaseTotalMultPurchased(state) * getAchievementBaseWheatMultiplier(state);
 };
 
 

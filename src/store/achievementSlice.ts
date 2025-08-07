@@ -13,8 +13,13 @@ export type Achievement = {
 type WheatAchievementType = "WPS" | "Wheat";
 
 const initialState = {
-    /// WHEAT
-    wheatAchievements: [
+    /// METADATA
+    metadata: {
+        completed: 0
+    },
+    data: {
+        /// WHEAT
+        wheatAchievements: [
         {
             id: 1,
             internalId: 1,
@@ -45,19 +50,21 @@ const initialState = {
             toastTriggered: false,
             description: "Harvest 1,000 wheat."
         }
-    ],
-    prestigeAchievement: [
-        {
-            id: 2,
-            internalId: 1,
-            name: "Rookie Numbers",
-            criteria: 1,
-            completed: false,
-            toastTriggered: false,
-            description: "Get your first Prestige Point."
+        ],
+        /// Prestige
+        prestigeAchievement: [
+            {
+                id: 2,
+                internalId: 1,
+                name: "Rookie Numbers",
+                criteria: 1,
+                completed: false,
+                toastTriggered: false,
+                description: "Get your first Prestige Point."
 
-        }
-    ]
+            }
+        ]
+    }
 };
 
 export const achievementSlice = createSlice({
@@ -65,31 +72,34 @@ export const achievementSlice = createSlice({
   initialState,
   reducers: {
     updateWheatAchievements: (state, action: { payload: { wps: number, wheat: number } }) => {
-        state.wheatAchievements.forEach((achievement) => {
+        state.data.wheatAchievements.forEach((achievement) => {
             if (achievement.type === "WPS" && action.payload.wps >= achievement.criteria! && !achievement.completed) {
                 achievement.completed = true;
+                state.metadata.completed ++;
             }
             if (achievement.type === "Wheat" && action.payload.wheat >= achievement.criteria! && !achievement.completed) {
                 achievement.completed = true;
+                state.metadata.completed ++;
             }
         });
     },
     updateWheatAchievementsTrigger: (state, action: { payload: Achievement[] }) => {
-        state.wheatAchievements.forEach((achievement) => {
+        state.data.wheatAchievements.forEach((achievement) => {
             if (action.payload.some(triggered => triggered.internalId === achievement.internalId)) {
                 achievement.toastTriggered = true;
             }
         });
     },
     updatePrestigeAchievements: (state, action: { payload: number }) => {
-        state.prestigeAchievement.forEach((achievement) => {
+        state.data.prestigeAchievement.forEach((achievement) => {
             if (!achievement.completed && action.payload >= achievement.criteria) {
                 achievement.completed = true;
+                state.metadata.completed ++;
             }
         });
     },
     updatePrestigeAchievementsTrigger: (state, action: { payload: Achievement[] }) => {
-        state.prestigeAchievement.forEach((achievement) => {
+        state.data.prestigeAchievement.forEach((achievement) => {
             if (action.payload.some(triggered => triggered.internalId === achievement.internalId)) {
                 achievement.toastTriggered = true;
             }
