@@ -7,6 +7,7 @@ import { getTotalWPS } from "../logic/gameLogic";
 import { updatePrestigeAchievements, updatePrestigeAchievementsTrigger, updateWheatAchievements, updateWheatAchievementsTrigger } from "../store/achievementSlice";
 import { getUntriggeredCompletedPrestigeAchievements, getUntriggeredCompletedWheatAchievements } from "../logic/achievementLogic";
 import { enqueueSnackbar } from "notistack";
+import { incrementPrestigePoints } from "../store/prestigeSlice";
 
 export const TickLoop = () => {
     const dispatch = useDispatch();
@@ -20,7 +21,8 @@ export const TickLoop = () => {
             const currentState = stateRef.current;
             dispatchRef.current(incrementWheat(getTotalWPS(currentState)));
             dispatchRef.current(updateWheatAchievements({ wps: getTotalWPS(currentState), wheat: currentState.game.wheat }));
-            dispatchRef.current(updatePrestigeAchievements(currentState.game.prestigePoints));
+            dispatchRef.current(incrementPrestigePoints(currentState.game.cumulativeWheat));
+            dispatchRef.current(updatePrestigeAchievements(currentState.prestige.metadata.prestigePointsOwned));
         }, TickRateInMilliseconds);
         return () => clearInterval(interval);
     }, []);

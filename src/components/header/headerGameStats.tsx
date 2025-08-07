@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Tooltip, Typography } from "@mui/material"
 import { useSelector } from "react-redux"
 import type { RootState } from "../../store/store";
 import { FormatNumber } from "../../helper/numberFormatter";
@@ -10,7 +10,13 @@ export const HeaderGameStats = () => {
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: 10 }}>
-            <Typography variant="h6">Prestige Points: {state.game.prestigePoints}</Typography>
+            <Tooltip title={
+                <Typography>
+                    {FormatNumber(state.game.cumulativeWheat)} / {FormatNumber(state.prestige.metadata.prestigeBreakPoint)}
+                </Typography>
+                }>
+                <Typography variant="h6">Prestige Points: {state.prestige.metadata.prestigePointsOwned}</Typography>
+            </Tooltip>
             <Typography variant="h6">WPS: {FormatNumber(getTotalWPS(state))}</Typography>
             <Typography variant="h6">
                 <Box component="span" sx={{ display: 'flex', alignItems: 'center' }}>

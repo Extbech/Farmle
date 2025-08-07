@@ -1,11 +1,10 @@
-
 import { AppBar, Box, Button, Toolbar } from "@mui/material"
 import { HeaderGameStats } from "./headerGameStats"
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
 
 export const Header = () => {
-    const prestigePoints = useSelector((state: RootState) => state.game.prestigePoints);
+    const prestigePoints = useSelector((state: RootState) => state.prestige.metadata.prestigePointsOwned);
 
     const dispatch = useDispatch();
     const handleReset = () => {
