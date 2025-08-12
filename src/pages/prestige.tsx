@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
-import { Background, ReactFlow } from "@xyflow/react";
+import { Background, Controls, ReactFlow } from "@xyflow/react";
 import '@xyflow/react/dist/style.css';
 import { PrestigeNode } from "../components/prestige/prestigeNode";
 
@@ -11,6 +11,7 @@ const nodeTypes = {
 };
 
 export const Prestige = () => {
+
     const { prestigeStore } = useSelector((state: RootState) => ({
         prestigeStore: state.prestige
     }));
@@ -21,7 +22,8 @@ export const Prestige = () => {
         {id: 'n3', type: 'plain', position: { x: 200, y: 0 }, data: prestigeStore.data.whickenWhisperer },
         {id: 'n4', type: 'plain', position: { x: 100, y: 0 }, data: prestigeStore.data.cowCulator },
         {id: 'n5', type: 'plain', position: { x: -100, y: 150 }, data: prestigeStore.data.dirtCheap },
-    ]
+    ];
+
     const edges = [
         {id: 'n1-n2',source: 'n1',target: 'n2',style: { stroke: prestigeStore.data.stinkyFertilizer.available ? '#c50b91ff' : '#aaa', strokeWidth: 3 }},
         {id: 'n1-n3',source: 'n1',target: 'n3',style: { stroke: prestigeStore.data.whickenWhisperer.available ? '#c50b91ff' : '#aaa', strokeWidth: 3 }},
@@ -43,9 +45,10 @@ export const Prestige = () => {
                 fitView
                 nodeTypes={nodeTypes}
                 onNodeClick={handleNodeClick}
+                nodesDraggable={false}
             >
                 <Background gap={24} />
-                {/* <Controls showInteractive={false} /> */}
+                <Controls showInteractive={false} />
             </ReactFlow>
 
         </Box>
